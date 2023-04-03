@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Optional;
 
 @Service
 public class ConnectionService {
@@ -59,8 +60,15 @@ public class ConnectionService {
 
 
     //incoming request handler
-    public String readData(String data) throws InvalidDataReceivedException {
-        handler.handleData(data);
+    public void readData(String data) {
+        try {
+            Optional<Request> optional = handler.handleData(data);
+            optional.ifPresent(request -> {
+                //create service to handle incoming request
+            });
+        } catch (InvalidDataReceivedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
