@@ -1,5 +1,6 @@
 package dev.jcodex.sockethandler.service;
 
+import dev.jcodex.sockethandler.exception.InvalidDataReceivedException;
 import dev.jcodex.sockethandler.exception.RequestTimedOutException;
 import dev.jcodex.sockethandler.model.Request;
 import dev.jcodex.sockethandler.model.Response;
@@ -28,16 +29,23 @@ public class ConnectionService {
         writerService = new SocketWriterService(writer,this);
 
         handler = new RequestRespnseHandler();
-//        new SocketReaderService(clientReader).run();
-//        startListening();
+
+        startListening();
+    }
+
+    public void init(Socket client) throws IOException {
+        InputStream reader = client.getInputStream();
+        readerService = new SocketReaderService(reader,this);
+        OutputStream writer = client.getOutputStream();
+        writerService = new SocketWriterService(writer,this);
+
+        handler = new RequestRespnseHandler();
+
+        startListening();
     }
 
     private void startListening() {
-        new Thread(() -> {
-            while (true){
-
-            }
-        });
+       readerService.run();
     }
 
 
@@ -51,7 +59,9 @@ public class ConnectionService {
 
 
     //incoming request handler
-    public String readData(String data) {
+    public String readData(String data) throws InvalidDataReceivedException {
         handler.handleData(data);
     }
+
+
 }
