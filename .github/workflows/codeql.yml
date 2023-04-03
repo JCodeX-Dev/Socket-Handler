@@ -67,7 +67,7 @@ jobs:
     #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
 
     - name: build
-    - run: |
+      run: |
         echo "Run, Build Application using script"
         ./mvnw clean install
         java -jar target/Socket-Handler-0.0.1-SNAPSHOT.jar
