@@ -61,19 +61,18 @@ public class RequestRespnseHandler {
         return found;
     }
 
-    public Object handleData(String data) throws InvalidDataReceivedException {
-
+    public Optional<Request> handleData(String data) throws InvalidDataReceivedException {
         Object obj = parseData();
-        if (obj instanceof Request){
-            //future logic
-        } else if (obj instanceof Response) {
+        if (obj instanceof Response){
             Response response = (Response)obj;
             responseMap.put(response.getRequestID(),response);
+            return Optional.of(null);
+        } else if (obj instanceof Request) {
+            return Optional.of((Request) obj);
         }
         else {
             throw new InvalidDataReceivedException("Invalid Data received at socket input stream");
         }
-        return obj;
     }
 
     private Object parseData() {
