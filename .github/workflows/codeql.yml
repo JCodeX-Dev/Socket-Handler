@@ -70,7 +70,6 @@ jobs:
       run: |
         echo "Run, Build Application using script"
         ./mvnw clean install
-        java -jar target/Socket-Handler-0.0.1-SNAPSHOT.jar
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
