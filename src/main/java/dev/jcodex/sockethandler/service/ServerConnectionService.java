@@ -1,5 +1,6 @@
 package dev.jcodex.sockethandler.service;
 
+import dev.jcodex.sockethandler.component.AppServiceComponent;
 import dev.jcodex.sockethandler.exception.ClientSocketConnectionException;
 import dev.jcodex.sockethandler.exception.IncomingClientConnectionException;
 import dev.jcodex.sockethandler.exception.ServerSocketConnectionException;
@@ -11,10 +12,16 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServerConnection {
+public class ServerConnectionService {
 
     @Getter
     List<ConnectionService> connections;
+
+    AppServiceComponent appServiceComponent;
+
+    public ServerConnectionService(AppServiceComponent appServiceComponent) {
+        this.appServiceComponent = appServiceComponent;
+    }
 
     public void init(int port){
         connections = new ArrayList<>();
@@ -39,13 +46,14 @@ public class ServerConnection {
                 }
 
                 try {
-                    ConnectionService service = new ConnectionService();
-                    service.init(clientSocket);
+                    ConnectionService service = appServiceComponent.assignAppService(clientSocket);
                     connections.add(service);
                 } catch (IOException e) {
                     throw new ClientSocketConnectionException("Socket connection failed connecting to client");
                 }
             }
         };
+
+        server.run();
     }
 }

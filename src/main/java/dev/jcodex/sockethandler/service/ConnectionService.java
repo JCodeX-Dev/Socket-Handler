@@ -1,9 +1,12 @@
 package dev.jcodex.sockethandler.service;
 
+import dev.jcodex.sockethandler.component.AppServiceComponent;
 import dev.jcodex.sockethandler.exception.InvalidDataReceivedException;
 import dev.jcodex.sockethandler.exception.RequestTimedOutException;
 import dev.jcodex.sockethandler.model.Request;
 import dev.jcodex.sockethandler.model.Response;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,7 +15,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Optional;
 
-@Service
+
 public class ConnectionService {
 
 
@@ -20,6 +23,12 @@ public class ConnectionService {
 
     SocketWriterService writerService;
     SocketReaderService readerService;
+
+    AppServiceComponent appServiceComponent;
+
+    public ConnectionService(AppServiceComponent appServiceComponent) {
+        this.appServiceComponent = appServiceComponent;
+    }
 
     public void init(String host, int port) throws IOException {
         Socket client = new Socket(host,port);

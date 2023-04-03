@@ -63,8 +63,7 @@ public class RequestRespnseHandler {
 
     public Optional<Request> handleData(String data) throws InvalidDataReceivedException {
         Object obj = parseData();
-        if (obj instanceof Response){
-            Response response = (Response)obj;
+        if (obj instanceof Response response){
             responseMap.put(response.getRequestID(),response);
             return Optional.of(null);
         } else if (obj instanceof Request) {
