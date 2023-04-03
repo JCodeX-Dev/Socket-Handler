@@ -3,6 +3,7 @@ package dev.jcodex.sockethandler.service;
 import dev.jcodex.sockethandler.exception.ClientSocketConnectionException;
 import dev.jcodex.sockethandler.exception.IncomingClientConnectionException;
 import dev.jcodex.sockethandler.exception.ServerSocketConnectionException;
+import lombok.Getter;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServerConnection {
+
+    @Getter
     List<ConnectionService> connections;
 
     public void init(int port){
