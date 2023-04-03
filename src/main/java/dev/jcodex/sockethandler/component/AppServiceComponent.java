@@ -1,5 +1,8 @@
 package dev.jcodex.sockethandler.component;
 
+import dev.jcodex.sockethandler.model.Packet;
+import dev.jcodex.sockethandler.model.Request;
+import dev.jcodex.sockethandler.model.Response;
 import dev.jcodex.sockethandler.service.ConnectionService;
 import dev.jcodex.sockethandler.service.ServerConnectionService;
 import org.springframework.stereotype.Component;
@@ -33,17 +36,17 @@ public interface AppServiceComponent {
 //
 //    }
 
-    void createPacket();
+    Packet createPacket();
 
-    void encryptData();
+    String encryptData();
 
-    void consumeRequest();
+    void consumeRequest(Request request);
 
-    void produceRequest();
+    Request produceRequest();
 
-    void consumeResponse();
+    void consumeResponse(Response response);
 
-    void produceResponse();
+    Response produceResponse();
 
     ConnectionService retrieveClientConnection(ServerConnectionService service);
 
