@@ -74,6 +74,7 @@ public class ConnectionService {
             Optional<Request> optional = handler.handleData(data);
             optional.ifPresent(request -> {
                 //create service to handle incoming request
+                appServiceComponent.consumeRequest(request);
             });
         } catch (InvalidDataReceivedException e) {
             throw new RuntimeException(e);
