@@ -62,4 +62,4 @@ Once you submit your PR, we will review your proposal. We may ask questions or r
 
 ### Your PR is merged!
 
-Congratulations :tada::tada: We thanks you for your contribution:sparkles:.
+Congratulations :tada::tada: We thank you for your contribution:sparkles:.
