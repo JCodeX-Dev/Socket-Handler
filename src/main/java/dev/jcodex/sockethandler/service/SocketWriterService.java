@@ -1,20 +1,20 @@
 package dev.jcodex.sockethandler.service;
 
-import dev.jcodex.sockethandler.model.Request;
+import dev.jcodex.sockethandler.model.Packet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.OutputStream;
-import java.security.cert.CertPath;
 
 @Data
 @AllArgsConstructor
-public class SocketWriterService {
+final class SocketWriterService {
 
-    OutputStream stream;
-    ConnectionService connectionService;
+    private OutputStream stream;
+    private Connection connection;
 
-    public void write(Request request){
+    void write(Packet packet) {
 
     }
+
 }

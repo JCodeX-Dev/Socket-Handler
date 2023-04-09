@@ -5,10 +5,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Request {
-
-    String requestID;
-
-    String message;
-
+public class Packet {
+    Message type;
+    String reqID;
+    String body;
 }
