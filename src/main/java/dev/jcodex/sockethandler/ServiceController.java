@@ -5,9 +5,9 @@ import dev.jcodex.sockethandler.service.IOHandler;
 
 public abstract class ServiceController {
 
-    public IOHandler handler;
+    public final IOHandler handler;
 
-    final void init(IOHandler handler) {
+    protected ServiceController(IOHandler handler) {
         this.handler = handler;
         handler.registerServiceController(this);
     }
