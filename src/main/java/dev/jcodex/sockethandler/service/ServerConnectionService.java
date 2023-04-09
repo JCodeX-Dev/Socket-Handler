@@ -1,10 +1,10 @@
 package dev.jcodex.sockethandler.service;
 
-import dev.jcodex.sockethandler.component.AppServiceComponent;
 import dev.jcodex.sockethandler.exception.ClientSocketConnectionException;
 import dev.jcodex.sockethandler.exception.IncomingClientConnectionException;
 import dev.jcodex.sockethandler.exception.ServerSocketConnectionException;
 import lombok.Getter;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -12,16 +12,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServerConnectionService {
+public final class ServerConnectionService {
 
     @Getter
-    List<ConnectionService> connections;
-
-    AppServiceComponent appServiceComponent;
-
-    public ServerConnectionService(AppServiceComponent appServiceComponent) {
-        this.appServiceComponent = appServiceComponent;
-    }
+    public List<Connection> connections;
 
     public void init(int port){
         connections = new ArrayList<>();
@@ -46,8 +40,8 @@ public class ServerConnectionService {
                 }
 
                 try {
-                    ConnectionService service = appServiceComponent.assignAppService(clientSocket);
-                    connections.add(service);
+                    Connection connection = Connection.init(clientSocket);
+                    connections.add(connection);
                 } catch (IOException e) {
                     throw new ClientSocketConnectionException("Socket connection failed connecting to client");
                 }
