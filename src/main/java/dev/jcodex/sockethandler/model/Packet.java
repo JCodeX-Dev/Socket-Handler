@@ -6,4 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Packet {
+    Message type;
+    String reqID;
+    String body;
 }
