@@ -53,7 +53,7 @@ public final class Connection {
 
 
     //outgoing request handler
-    void sendData(Packet packet) throws RequestTimedOutException {
+    void sendData(Packet packet) throws IOException {
 //        Request request = handler.generateRequest(message);
         writerService.write(packet);
 //        Response response = handler.readResponse(request);
