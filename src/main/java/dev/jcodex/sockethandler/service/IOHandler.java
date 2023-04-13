@@ -6,6 +6,7 @@ import dev.jcodex.sockethandler.exception.RequestTimedOutException;
 import dev.jcodex.sockethandler.model.Message;
 import dev.jcodex.sockethandler.model.Packet;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
@@ -39,12 +40,12 @@ public final class IOHandler {
 
 
     //outgoing request
-    public Packet sendRequest(String body) throws RequestTimedOutException {
+    public Packet sendRequest(String body) throws RequestTimedOutException, IOException {
         Packet packet = createPacket(body, Message.REQUEST);
         return sendRequest(packet);
     }
 
-    public Packet sendRequest(Packet packet) throws RequestTimedOutException {
+    public Packet sendRequest(Packet packet) throws RequestTimedOutException, IOException {
         String requestID = packet.getReqID();
 
         connection.sendData(packet);
